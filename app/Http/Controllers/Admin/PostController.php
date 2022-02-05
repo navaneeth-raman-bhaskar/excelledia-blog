@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::select('id', 'title', 'body')->paginate();
+        $posts = Post::select('id', 'title', 'body')->paginate(1);
 
         return view('admin.posts.index')->with(compact('posts'));
     }
@@ -32,9 +32,10 @@ class PostController extends Controller
     }
 
 
-    public function show(Post $post)
+    public function show(Post $post, PostService $postService)
     {
-        return view('admin.posts.show')->with('post', $post);
+        $data = $postService->show($post);
+        return view('admin.posts.show')->with('post', $data);
 
     }
 
@@ -56,9 +57,9 @@ class PostController extends Controller
     public function destroy(Post $post, PostService $postService)
     {
         //if (Auth::user()->isAdmin() and $post->user_id === Auth::id()) {
-            $postService->delete($post);
-            return $this->successResponse('Deleted');
-       // }
+        $postService->delete($post);
+        return $this->successResponse('Deleted');
+        // }
         //return redirect()->route('admin.posts.index');
     }
 }

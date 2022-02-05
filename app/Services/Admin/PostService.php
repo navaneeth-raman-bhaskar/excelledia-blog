@@ -24,4 +24,9 @@ class PostService
         $post->comments()->delete();
         $post->delete();
     }
+
+    public function show(Post $post)
+    {
+        return $post->loadMissing('comments.replies');
+    }
 }
