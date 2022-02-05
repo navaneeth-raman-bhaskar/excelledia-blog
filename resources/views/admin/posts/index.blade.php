@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
     <h3>Blog Posts</h3>
-    <a href="{{route('admin.posts.create')}}">Create Post</a>
+    <a class="btn btn-primary" href="{{route('admin.posts.create')}}">Create Post</a>
 
     <table class="table">
         <thead>
@@ -19,8 +19,8 @@
                 <td>{{$post->title}}</td>
                 <td>{{$post->render_body}}</td>
                 <td>
-                    <a href="{{route('admin.posts.edit',$post)}}?_method=DELETE">Edit</a>
-                    <a class="delete" href="{{route('admin.posts.destroy',$post)}}">Delete</a>
+                    <a href="{{route('admin.posts.edit',$post)}}" class="text-success">Edit</a>
+                    <a class="delete text-danger" href="{{route('admin.posts.destroy',$post)}}">Delete</a>
                 </td>
             </tr>
         @endforeach
