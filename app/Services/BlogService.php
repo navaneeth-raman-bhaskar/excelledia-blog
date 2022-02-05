@@ -13,11 +13,11 @@ class BlogService
         return Post::select('id','title', 'body')->withCount('comments')->paginate();
     }
 
-    public function comment(Post $post, string $reply, ?Comment $comment = null)
+    public function comment(Post $post, string $reply, ?Comment $commentParent = null)
     {
         $comment = new  Comment();
         $comment->comment = $reply;
-        $comment->comment_id = $comment->id ?? null;
+        $comment->comment_id = $commentParent->id ?? null;
         $post->comments()->save($comment);
     }
 
